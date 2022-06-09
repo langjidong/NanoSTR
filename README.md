@@ -12,15 +12,16 @@ Option
         -help           print HELP message
 
 Example:<br>
-***perl NanoStrTyping.pl -fq nanopore.fastq -step_size 10 -configure STR.bed -tmp_dir tmpdir -process 1***
+**perl NanoStrTyping.pl -fq nanopore.fastq -step_size 10 -configure STR.bed -tmp_dir tmpdir -process 1**
 
 The STR.bed format's example:<br>
 ```
-chrY    22633873        22633911        DYS392<br>
-chrY    14937824        14937873        DYS438<br>
-chrY    24365070        24365225        DYS448<br>
-chrY    14379564        14379655        DYS635<br>
-chrY    15278737        15278851        DYS447<br>
+chrY    22633873        22633911        DYS392
+chrY    14937824        14937873        DYS438
+chrY    24365070        24365225        DYS448
+chrY    14379564        14379655        DYS635
+chrY    15278737        15278851        DYS447
 ```
 
-Contact and E-mail: langjidong@hotmail.com
+The method is still under further optimization and development, please contact us if you have any questions.
+***Contact and E-mail: langjidong@hotmail.com***
