@@ -23,5 +23,5 @@ chrY    14379564        14379655        DYS635
 chrY    15278737        15278851        DYS447
 ```
 
-The method is still under further optimization and development, please contact us if you have any questions.<br>
+The method is still under further optimization and development, please contact us if you have any good suggestions and questions.<br>
 ***Contact and E-mail: langjidong@hotmail.com***
