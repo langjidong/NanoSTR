@@ -96,9 +96,9 @@ close IN;
 `cat $configure|awk '{print \$1\"\\t\"\$2-500\"\\t\"\$3-\$2+1+1000\"\\t\"\$4}'|while read a b c d;do perl $Bin/script/Seed_sequence.pl $Bin/database/by_chr/\${a}.fa \${b} \${c} reference Blast/\${d}/reference.fa;done`;
 `cat $configure|awk '{print \$4\"\\t\"501\"\\t\"501+\$3-\$2}'|while read a b c;do echo -e \"\${b}\\t\${c}\" > Blast/\${a}/reference.anchor.info;done`;	####There Is A Bug, Which "-e" Is In The Anchor File####
 `cat $configure|awk '{print \$4}'|while read f;do cat ./Seed/\${f}.seedlist|while read a b c;do cat ./Pick_Reads/\${f}/\${a}.fq|perl -e 'while(<>) {chomp; if(/^\@/) {\$n+=1; \$seq=<>; \$tmp=<>; \$qual=<>; print \">query\$n\\n\$seq\";}}' > Blast/\${f}/\${a}.fa;done;done`;
-`cat $configure|while read a b c d;do /mnt/nas/bioinfo/langjidong/PERL/software/SE-GeneFusion-LJD/bin/formatdb -i Blast/\${d}/reference.fa -p F -o T;done`;
-`cat $configure|awk '{print \$4}'|while read f;do cat ./Seed/\${f}.seedlist|while read a b c;do /mnt/nas/bioinfo/langjidong/PERL/software/SE-GeneFusion-LJD/bin/blastall -p blastn -i Blast/\${f}/\${a}.fa -d Blast/\${f}/reference.fa -o Blast/\${f}/\${a}.m8.blast -e 1e-10 -F F -m 8 -a $process;done;done`;
-`cat $configure|awk '{print \$4}'|while read f;do cat ./Seed/\${f}.seedlist|while read a b c;do /mnt/nas/bioinfo/langjidong/PERL/software/SE-GeneFusion-LJD/bin/blastall -p blastn -i Blast/\${f}/\${a}.fa -d Blast/\${f}/reference.fa -o Blast/\${f}/\${a}.blast -e 1e-10 -F F -a $process;done;done`;
+`cat $configure|while read a b c d;do $Bin/bin/formatdb -i Blast/\${d}/reference.fa -p F -o T;done`;
+`cat $configure|awk '{print \$4}'|while read f;do cat ./Seed/\${f}.seedlist|while read a b c;do $Bin/bin/blastall -p blastn -i Blast/\${f}/\${a}.fa -d Blast/\${f}/reference.fa -o Blast/\${f}/\${a}.m8.blast -e 1e-10 -F F -m 8 -a $process;done;done`;
+`cat $configure|awk '{print \$4}'|while read f;do cat ./Seed/\${f}.seedlist|while read a b c;do $Bin/bin/blastall -p blastn -i Blast/\${f}/\${a}.fa -d Blast/\${f}/reference.fa -o Blast/\${f}/\${a}.blast -e 1e-10 -F F -a $process;done;done`;
 `cat $configure|awk '{print \$4}'|while read a;do cat Blast/\${a}/reference.anchor.info|while read d b c;do perl $Bin/script/Filter-blastm8.pl Blast/\${a} \${b} \${c} $step_size;done;done`;	####There Is A Bug, Which "-e" Is In The Anchor File####
 
 ####Result Output####
