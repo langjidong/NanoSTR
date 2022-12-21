@@ -14,7 +14,7 @@ Option
 Example:<br>
 **perl NanoStrTyping.pl -fq nanopore.fastq -step_size 10 -configure STR.bed -tmp_dir tmpdir -process 1**
 
-Usage tips
+Usage tips:
 
 1. Before running, users need to install some following dependencies, such as Porechop, NanoPlot and BLAST. BTW, BLAST can be found in the *bin* folder, and needs to run command “*__chmod -R 755 ./bin__*” to obtain execution permission. If users want to use the latest version of these software, please install them and need to make corresponding changes in the *NanoStrTyping.pl* program. <br />
 
