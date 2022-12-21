@@ -23,10 +23,10 @@ Usage tips
 3. Prepare the information of the targeted STR loci, and regard the first four columns as the *bed* file input by the *NanoStrTyping.pl* program, such as *str.bed*. <br />
 ```
 Chromosome	Start	End	Locus	Assembly	CE	Unit_Bases	Extra_Bases
-chrY	20,471,987	20,472,025	DYS392	GRCh38.p12	13	3	0
-chrY	12,825,889	12,825,948	DYS438	GRCh38.p12	12	5	0
-chrY	22,218,923	22,219,078	DYS448	GRCh38.p12	19	6	42
-chrY	12,258,860	12,258,951	DYS635	GRCh38.p12	23	4	0
+chrY	20471987	20472025	DYS392	GRCh38.p12	13	3	0
+chrY	12825889	12825948	DYS438	GRCh38.p12	12	5	0
+chrY	22218923	22219078	DYS448	GRCh38.p12	19	6	42
+chrY	12258860	12258951	DYS635	GRCh38.p12	23	4	0
 ```
 And the *str.bed* format's example:<br />
 ```
@@ -38,26 +38,21 @@ chrY	12258860	12258951	DYS635
 
 4. Run the *NanoStrTyping.pl* program, the command line is for example “*perl NanoStrTyping.pl -fq ONT.fastq -step_size 10 -configure str.bed -tmp_dir tmpdir -process 4*”. <br />
 
-5. After the program finished, run the program *script/Typing_predict.pl* to generate the final typing result of the STR loci. For example, users can run the command line “*perl ./script/Typing_predict.pl Typing_Result/DYS448 6 10 42*” to get a file named *predict.result* in the *Typing_Result/DYS448* folder, which contains the following content: <br />
+5. After the program finished, run the *script/Typing_predict.pl* to generate the final typing result of the STR loci. For example, users can run the command line “*perl ./script/Typing_predict.pl Typing_Result/DYS448 6 10 42*” to get a file named *predict.result* in the *Typing_Result/DYS448* folder, which contains the following content: <br />
 ```
         (CE)            (Support Read Number)        (STR Length)
 Tmp1:   19      Read_Support:   7643    STR_Length:     156
-Tmp1:   19      Read_Support:   2919    STR_Length:     158
 Tmp3:   19      Read_Support:   5049    STR_Length:     156
-Tmp3:   19      Read_Support:   2199    STR_Length:     158
 Tmp4:   19      Read_Support:   3044    STR_Length:     156
-Tmp4:   19      Read_Support:   1270    STR_Length:     158
 Tmp5:   19      Read_Support:   2393    STR_Length:     156
-Tmp5:   19      Read_Support:   912     STR_Length:     158
 Tmp6:   19      Read_Support:   1876    STR_Length:     156
-Tmp6:   19      Read_Support:   794     STR_Length:     158
 Tmp7:   19      Read_Support:   1563    STR_Length:     156
 Tmp8:   19      Read_Support:   1125    STR_Length:     156
 Tmp9:   19      Read_Support:   940     STR_Length:     156
 Tmp10:  19      Read_Support:   791     STR_Length:     156
 ```
 
-6. Finally, the results with the mode and supported read number are selected as the final genotype for this target STR locus, that is, for example, DYS448 is considered to be homozygous, and the allele1/allele2 is 19/19. <br />
+6. Finally, the results with the mode and supported read number are selected as the final genotype for each target STR locus, that is, for example, DYS448 is considered to be homozygous, and the allele1/allele2 is 19/19. <br />
 
 Note: The method is still under further optimization and development, please contact us if you have any good suggestions and questions.<br>
 ***Contact and E-mail: langjidong@hotmail.com***
