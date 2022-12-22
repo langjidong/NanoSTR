@@ -16,7 +16,7 @@ Example:<br>
 
 Usage tips:
 
-1. Before running, users need to install some following dependencies, such as Porechop, NanoPlot and BLAST. BTW, BLAST can be found in the *bin* folder, and needs to run command “*__chmod -R 755 ./bin__*” to obtain execution permission. If users want to use the latest version of these software, please install them and need to make corresponding changes in the *NanoStrTyping.pl* program. <br />
+1. Before running, users need to install some following dependencies, such as Porechop, NanoPlot and BLAST. BTW, BLAST can be found in the *bin* folder, and needs to run command “*__chmod -R 755 ./bin__*” to obtain execution permission. If users want to use the latest version of these software, please install them and need to make corresponding changes in the *NanoStrTyping.pl* program. For ease of installation, we suggest that users can select *conda* for environment configuration. <br />
 
 2. Put chromosomal reference genome sequence into the *database/by_chr/* folder, and save them in the file format with the suffix _*.fa_. For example, the Y chromosome (*chrY.fa*). <br />
 
@@ -54,5 +54,12 @@ Tmp10:  19      Read_Support:   791     STR_Length:     156
 
 6. Finally, the results with the mode and supported read number are selected as the final genotype for each target STR locus, that is, for example, DYS448 is considered to be homozygous, and the allele1/allele2 is 19/19. <br />
 
-Note: The method is still under further optimization and development, please contact us if you have any good suggestions and questions.<br>
+Note:
+1. Since different versions of BLAST have different commands to run, we suggest that users can change Line 107-109 in the *NanoStrTyping.pl* program by themselves! For example, the default BLAST version is 2.2.23, and the users’ version is 2.13.0+, then the users need to replace the commands of Line 107-109 in the *NanoStrTyping.pl* program with following commands. But it should be note that different software version and parameter settings may affect the result of supported read number, please pay attention and make adjustments based on the actual situations. <br />
+```
+`cat $configure|while read a b c d;do makeblastdb -in Blast/\${d}/reference.fa -dbtype nucl -parse_seqids;done`;
+`cat $configure|awk '{print \$4}'|while read f;do cat ./Seed/\${f}.seedlist|while read a b c;do blastn -task blastn -query Blast/\${f}/\${a}.fa -db Blast/\${f}/reference.fa -outfmt 6 -num_threads $process -out Blast/\${f}/\${a}.m8.blast -evalue 1e-10 -dust no;done;done`;
+`cat $configure|awk '{print \$4}'|while read f;do cat ./Seed/\${f}.seedlist|while read a b c;do blastn -task blastn -query Blast/\${f}/\${a}.fa -db Blast/\${f}/reference.fa -out Blast/\${f}/\${a}.blast -evalue 1e-10 -num_threads $process -dust no;done;done`;
+```
+3. The method is still under further optimization and development, please contact us if you have any good suggestions and questions.<br />
 ***Contact and E-mail: langjidong@hotmail.com***
