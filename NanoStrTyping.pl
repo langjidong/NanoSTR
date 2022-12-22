@@ -51,6 +51,8 @@ my $basename=basename($fq);
 $basename=~s/(.*).fastq/$1/g;
 
 ####Data Pre-process and Quality Control####
+my $time=`date`;
+print "Process: 0%----Data Pre-process and Quality Control Start. Time: $time\n";
 
 `mkdir clean_data`;
 `porechop -t $process -i $fq -o ./clean_data/$basename.clean.fq`;
@@ -58,6 +60,8 @@ $basename=~s/(.*).fastq/$1/g;
 `NanoPlot -t $process --fastq ./clean_data/$basename.clean.fq --plots hex dot -o ./QC -p $basename`;
 
 ####Generate Seed Sequence List####
+$time=`date`;
+print "Process: 20%----Data Pre-process and Quality Control End and Generate Seed Sequence List Start. Time: $time\n";
 
 open IN, "$configure" or die;
 
@@ -84,12 +88,16 @@ while(<IN>)
 close IN;
 
 ####Pick Target Reads Based On Seed List####
+$time=`date`;
+print "Process: 40%----Generate Seed Sequence List End and Pick Target Reads Based On Seed List Start. Time: $time\n";
 
 `mkdir Pick_Reads`;
 `cat $configure|while read a b c d;do mkdir Pick_Reads/\${d};done`;
 `cat $configure|awk '{print \$4}'|while read f;do cat ./Seed/\${f}.seedlist|while read a b c;do perl $Bin/script/Tagseq-fastq.pl ./clean_data/$basename.clean.fq \${b} \${c} ./Pick_Reads/\${f}/\${a}.fq;done;done`;
 
 ####Blast Alignment####
+$time=`date`;
+print "Process: 60%----Pick Target Reads Based On Seed List End and Blast Alignment Start. Time: $time\n";
 
 `mkdir Blast`;
 `cat $configure|while read a b c d;do mkdir Blast/\${d};done`;
@@ -102,8 +110,14 @@ close IN;
 `cat $configure|awk '{print \$4}'|while read a;do cat Blast/\${a}/reference.anchor.info|while read d b c;do perl $Bin/script/Filter-blastm8.pl Blast/\${a} \${b} \${c} $step_size;done;done`;	####There Is A Bug, Which "-e" Is In The Anchor File####
 
 ####Result Output####
+$time=`date`;
+print "Process: 80%----Blast Alignment End and Result Output Start. Time: $time\n";
+
 `mkdir Typing_Result`;
 `mkdir $tmp_dir`;
 `cat $configure|awk '{print \$4}'|while read a;do mkdir Typing_Result/\${a};done`;
 `cat $configure|awk '{print \$4}'|while read a;do mkdir $tmp_dir/\${a};done`;
 `cat $configure|awk '{print \$4}'|while read a;do perl $Bin/script/Result.pl Pick_Reads/\${a}/ Blast/\${a} $step_size $tmp_dir/\${a} Typing_Result/\${a};done`;
+
+$time=`date`;
+print "Process: 100%----Result Output End and All tasks completed. Time: $time\n";
