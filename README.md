@@ -61,5 +61,5 @@ Note:
 `cat $configure|awk '{print \$4}'|while read f;do cat ./Seed/\${f}.seedlist|while read a b c;do blastn -task blastn -query Blast/\${f}/\${a}.fa -db Blast/\${f}/reference.fa -outfmt 6 -num_threads $process -out Blast/\${f}/\${a}.m8.blast -evalue 1e-10 -dust no;done;done`;
 `cat $configure|awk '{print \$4}'|while read f;do cat ./Seed/\${f}.seedlist|while read a b c;do blastn -task blastn -query Blast/\${f}/\${a}.fa -db Blast/\${f}/reference.fa -out Blast/\${f}/\${a}.blast -evalue 1e-10 -num_threads $process -dust no;done;done`;
 ```
-3. The method is still under further optimization and development, please contact us if you have any good suggestions and questions.<br />
+2. The method is still under further optimization and development, please contact us if you have any good suggestions and questions.<br />
 ***Contact and E-mail: langjidong@hotmail.com***
