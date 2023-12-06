@@ -63,3 +63,7 @@ Note:
 ```
 2. The method is still under further optimization and development, please contact us if you have any good suggestions and questions.<br />
 ***Contact and E-mail: langjidong@hotmail.com***
+
+**Publications**
+
+Lang J, Xu Z, Wang Y, Sun J, Yang Z. NanoSTR: A method for detection of target short tandem repeats based on nanopore sequencing data. Front Mol Biosci. 2023 Jan 18;10:1093519. doi: 10.3389/fmolb.2023.1093519. PMID: 36743210; PMCID: PMC9889824.
